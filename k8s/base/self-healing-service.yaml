@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: self-healing-metrics
+  namespace: ai-platform
+  labels:
+    app: self-healing
+spec:
+  selector:
+    app: self-healing
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+  
+    

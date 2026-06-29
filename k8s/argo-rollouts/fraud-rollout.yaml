@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+
+metadata:
+  name: fraud-detection
+  namespace: ai-platform
+
+spec:
+  replicas: 2
+
+  revisionHistoryLimit: 2
+
+  selector:
+    matchLabels:
+      app: fraud
+
+  template:
+    metadata:
+      labels:
+        app: fraud
+
+    spec:
+      containers:
+        - name: fraud
+
+          image: bharatdasa/fraud_ai_ml:latest
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8000
+              name: http
+
+            - containerPort: 8001
+              name: metrics
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
+
+  strategy:
+    canary: {}

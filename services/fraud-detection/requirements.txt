@@ -1,0 +1,9 @@
+flask==3.0.3
+gunicorn==22.0.0
+kafka-python==2.0.2
+pymongo==4.8.0
+joblib==1.4.2
+numpy==1.26.4
+pandas==2.2.2
+prometheus-client==0.20.0
+scikit-learn==1.8.0

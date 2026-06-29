@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: ServiceAccount
+
+metadata:
+  name: self-healing-sa
+  namespace: ai-platform
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+
+metadata:
+  name: self-healing-role
+  namespace: ai-platform
+
+rules:
+
+  # =========================================
+  # Deployments
+  # =========================================
+
+  - apiGroups: ["apps"]
+
+    resources:
+      - deployments
+      - deployments/scale
+
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+
+  # =========================================
+  # Pods
+  # =========================================
+
+  - apiGroups: [""]
+
+    resources:
+      - pods
+
+    verbs:
+      - get
+      - list
+      - delete
+
+  # =========================================
+  # Argo Rollouts
+  # =========================================
+
+  - apiGroups: ["argoproj.io"]
+
+    resources:
+      - rollouts
+      - rollouts/status
+      - rollouts/finalizers
+
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+      - patch
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+
+metadata:
+  name: self-healing-binding
+  namespace: ai-platform
+
+subjects:
+  - kind: ServiceAccount
+    name: self-healing-sa
+    namespace: ai-platform
+
+roleRef:
+  kind: Role
+  name: self-healing-role
+  apiGroup: rbac.authorization.k8s.io

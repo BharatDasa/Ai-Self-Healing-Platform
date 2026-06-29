@@ -1,0 +1,3 @@
+id,service_name,reason,model_score,created_at
+305,fraud-detection,extreme anomaly detected,0.89427,2026-05-20 17:31:52.785780
+306,fraud-detection,extreme anomaly detected,0.9033,2026-06-18 04:00:26.997634

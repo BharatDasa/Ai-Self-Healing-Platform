@@ -1,0 +1,8 @@
+kafka-python==2.0.2
+joblib==1.4.2
+numpy==1.26.4
+pandas==2.2.2
+prometheus-client==0.20.0
+psycopg2-binary==2.9.9
+kubernetes==30.1.0
+scikit-learn==1.8.0

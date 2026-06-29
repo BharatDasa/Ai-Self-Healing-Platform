@@ -1,0 +1,53 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+
+metadata:
+  name: fraud-prometheus-keda
+  namespace: ai-platform
+
+spec:
+  scaleTargetRef:
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    name: fraud-detection
+
+  pollingInterval: 15
+
+  cooldownPeriod: 60
+
+  minReplicaCount: 1
+
+  maxReplicaCount: 5
+
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+
+        scaleUp:
+          stabilizationWindowSeconds: 0
+
+          policies:
+            - type: Pods
+              value: 2
+              periodSeconds: 15
+
+        scaleDown:
+          stabilizationWindowSeconds: 60
+
+          policies:
+            - type: Pods
+              value: 1
+              periodSeconds: 30
+
+  triggers:
+    - type: prometheus
+
+      metadata:
+        serverAddress: http://prometheus-operated.monitoring.svc.cluster.local:9090
+
+        metricName: ai_target_replicas
+
+        threshold: "1"
+
+        query: |
+          max(ai_target_replicas)

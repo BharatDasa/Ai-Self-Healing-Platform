@@ -1,0 +1,13 @@
+
+AI MODEL DRIFT REPORT
+=====================
+
+Generated: 2026-06-29 21:00:09.626869
+
+Dataset Size: 25134
+
+Mean Amount Score: 0.4997
+
+Mean Risk Score: 0.4997
+
+Status: HEALTHY

@@ -1,0 +1,88 @@
+apiVersion: batch/v1
+kind: Job
+
+metadata:
+  name: airflow-init
+  namespace: airflow
+
+spec:
+
+  template:
+
+    metadata:
+
+      annotations:
+        sidecar.istio.io/inject: "false"
+
+      labels:
+        app: airflow-init
+
+    spec:
+
+      restartPolicy: Never
+
+      nodeSelector:
+        workload: app
+
+      containers:
+
+        - name: airflow-init
+
+          image: bharatdasa/enterprise-airflow:latest
+
+          imagePullPolicy: Always
+
+          envFrom:
+
+            - secretRef:
+                name: airflow-secret
+
+            - configMapRef:
+                name: airflow-config
+
+          volumeMounts:
+
+            - name: logs-storage
+              mountPath: /opt/airflow/logs
+
+            - name: dags-storage
+              mountPath: /opt/airflow/dags/ml-pipelines
+
+          command:
+            - /bin/bash
+            - -c
+
+          args:
+            - |
+
+              echo "🚀 Starting Airflow bootstrap..."
+
+              mkdir -p \
+              /opt/airflow/dags/ml-pipelines/dags \
+              /opt/airflow/dags/ml-pipelines/scripts \
+              /opt/airflow/dags/ml-pipelines/models \
+              /opt/airflow/dags/ml-pipelines/analytics/exports \
+              /opt/airflow/dags/ml-pipelines/analytics/reports
+
+              airflow db migrate
+
+              airflow users create \
+                --username admin \
+                --firstname Bharat \
+                --lastname Dasa \
+                --role Admin \
+                --email admin@platform.local \
+                --password admin123 || true
+
+              echo "✅ Airflow bootstrap completed"
+
+      volumes:
+
+        - name: dags-storage
+          persistentVolumeClaim:
+            claimName: airflow-dags-pvc
+
+        - name: logs-storage
+          persistentVolumeClaim:
+            claimName: airflow-logs-pvc
+
