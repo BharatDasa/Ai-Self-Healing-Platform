@@ -1,0 +1,37 @@
+Prometheus Metrics
+        │
+        ▼
+AI Feature Extraction
+        │
+        ▼
+ ┌──────────────────────────────┐
+ │ AI Anomaly Intelligence      │
+ │                              │
+ │ • Event Velocity Analysis    │
+ │ • Replica Saturation         │
+ │ • CPU Pressure Detection     │
+ │ • Memory Instability         │
+ │ • Drift Evaluation           │
+ │ • Failure Pattern Learning   │
+ └──────────────┬───────────────┘
+                ▼
+
+      AI Decision Engine
+                │
+    ┌───────────┼───────────┐
+    │           │           │
+    ▼           ▼           ▼
+
+ Scale Pods  Restart Pods  Rollback
+
+    │           │           │
+    └───────────┼───────────┘
+                ▼
+
+ Kubernetes Recovery Layer
+                ▼
+ Infrastructure Stabilization
+                ▼
+ Telemetry Revalidation
+                ▼
+ Platform Healthy
