@@ -2,7 +2,11 @@
 
 ## Enterprise-Grade Autonomous Infrastructure with AI-Driven Scaling, MLOps, Observability, and Resilience
 
+<img width="1024" height="1536" alt="AI-POWERED SELF-HEALING KUBERNETES PLATFORM INFRASTRUCTURE " src="https://github.com/user-attachments/assets/74eeca78-7aa9-4365-9f8a-e2750944545b" />
+
+
 ---
+
 
 # 🚀 Overview
 
@@ -633,3 +637,6 @@ This project demonstrates a complete enterprise-grade autonomous AI infrastructu
 * improving infrastructure resilience
 
 within a fully cloud-native, production-style ecosystem.
+
+<img width="1536" height="1024" alt="Jenkins AI Self-Heal K8s Enterprise CI-CD" src="https://github.com/user-attachments/assets/893ba149-7b80-4bc0-b8e6-005728566dbb" />
+
